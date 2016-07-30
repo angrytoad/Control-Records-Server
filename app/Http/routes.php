@@ -14,3 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::post('/login', 'Auth\LoginController@store');
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/admin', function() {
+       return view('welcome');
+    });
+});

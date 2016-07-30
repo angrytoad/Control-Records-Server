@@ -1,0 +1,45 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: table;
+    font-weight: 100;
+    font-family: 'Lato', sans-serif;
+}
+
+.container {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.content {
+    text-align: center;
+    display: inline-block;
+}
+
+.title {
+    font-size: 96px;
+}
+
+#login-form{
+    width:300px;
+    margin:auto;
+}
+
+#login-form input{
+    width:100%;
+    margin-bottom:10px;
+}
+
+.alert{
+    width:350px;
+    margin:auto;
+    color: red;
+    font-weight: 700;
+    text-align: left;
+}
