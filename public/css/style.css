@@ -1,45 +1,38 @@
-html, body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    display: table;
-    font-weight: 100;
-    font-family: 'Lato', sans-serif;
-}
-
-.container {
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.content {
-    text-align: center;
-    display: inline-block;
-}
-
-.title {
-    font-size: 96px;
-}
-
-#login-form{
-    width:300px;
-    margin:auto;
-}
-
-#login-form input{
-    width:100%;
-    margin-bottom:10px;
-}
-
 .alert{
     width:350px;
     margin:auto;
     color: red;
     font-weight: 700;
     text-align: left;
+}
+
+#new-venue-form input{
+    width:100%;
+    margin-bottom:10px;
+}
+
+#venue-list, #band-list{
+    list-style-type:none;
+    padding:0px;
+}
+
+#venue-list > li, #band-list > li{
+    padding:5px 10px;
+    background:#EDEDED;
+    margin-bottom:2px;
+}
+
+#gig-list{
+    list-style-type:none;
+    padding:0px;
+}
+
+#gig-list li h4{
+    margin:0px;
+}
+
+#gig-list li{
+    margin-bottom:10px;
+    padding:10px;
+    background:#EDEDED;
 }
