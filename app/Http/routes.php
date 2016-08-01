@@ -39,3 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+
+Route::group(['middleware' => 'cors', 'prefix' => 'api', 'namespace' => 'Api'], function () {
+    Route::get('gigs', 'ApiController@getAllGigs');
+});
