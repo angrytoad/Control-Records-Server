@@ -11,8 +11,9 @@
                     <div class="col-md-6">
                         <ul>
                             <a href="/bands"><li>Manage Bands</li></a>
-                            <a href="/gigs"><li>Manage Gigs</li></a>
                             <a href="/venues"><li>Manage Venues</li></a>
+                            <a href="/gigs"><li>Manage Gigs</li></a>
+                            <a href="/users"><li>Manage Users</li></a>
                         </ul>
                     </div>
                     <div class="col-md-6">

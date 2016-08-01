@@ -58,6 +58,7 @@
                         <li><a href="{{ url('/bands') }}">Band Manager</a></li>
                         <li><a href="{{ url('/venues') }}">Venue Manager</a></li>
                         <li><a href="{{ url('/gigs') }}">Gig Manager</a></li>
+                        <li><a href="{{ url('/users') }}">User Manager</a></li>
                     @endif
                 </ul>
 

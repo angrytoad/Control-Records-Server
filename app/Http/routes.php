@@ -34,5 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/venues', 'VenueController@index');
     Route::post('/venues/create', 'VenueController@store');
 
+    Route::get('/users', 'UserController@index');
+    Route::post('/users', 'UserController@store');
+
 });
 
