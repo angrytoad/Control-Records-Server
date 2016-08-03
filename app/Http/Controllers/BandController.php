@@ -56,4 +56,29 @@ class BandController extends Controller
 
         return redirect('/bands');
     }
+
+    public function bandPage($bandId){
+        $band = Band::find($bandId);
+        return view('band/band', array(
+            'band' => $band
+        ));
+    }
+
+    public function bandDelete($bandId){
+        $band = Band::find($bandId);
+        $band->delete();
+
+        return redirect('/bands');
+    }
+
+    public function bandEdit(Request $request, $bandId){
+        $band = Band::find($bandId);
+        $band->name = $request->input('name');
+        $band->primary_name = $request->input('primary_name');
+        $band->primary_email = $request->input('primary_email');
+        $band->primary_telephone = $request->input('primary_telephone');
+        $band->save();
+
+        return redirect('/bands/'.$bandId);
+    }
 }

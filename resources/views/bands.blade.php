@@ -25,6 +25,13 @@
                                             <li>Email: {{ $band->primary_email }}</li>
                                             <li>Telephone: {{ $band->primary_telephone }}</li>
                                         </ul>
+                                        <div class="band-options">
+                                            <a href="/bands/{{$band->id}}">
+                                                <button class="btn btn-info">
+                                                    Edit
+                                                </button>
+                                            </a>
+                                        </div>
                                     </li>
                                 @endforeach
                             @endif
