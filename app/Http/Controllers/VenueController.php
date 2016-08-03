@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use DB;
 use App\Venue;
+use App\Gig;
 
 class VenueController extends Controller
 {
@@ -63,5 +64,40 @@ class VenueController extends Controller
         $venue->save();
 
         return redirect('/venues');
+    }
+
+    public function venuePage($venueId){
+        $venue = Venue::find($venueId);
+        return view('venue/venue', array(
+            'venue' => $venue
+        ));
+    }
+
+    public function venueDelete($venueId){
+        $venue = Venue::find($venueId);
+        $venue->delete();
+
+        $gigs = Gig::where('venue_id',$venueId)->get();
+        foreach($gigs as $gig){
+            $gig->delete();
+        }
+
+        return redirect('/venues');
+    }
+
+    public function venueEdit(Request $request, $venueId){
+        $venue = Venue::find($venueId);
+        $venue->venue_name = $request->input('venue-name');
+        $venue->contact_name = $request->input('contact-name');
+        $venue->contact_email = $request->input('contact-email');
+        $venue->contact_telephone = $request->input('contact-telephone');
+        $coordinates = json_encode([
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude')
+        ]);
+        $venue->coordinates = $coordinates;
+        $venue->save();
+
+        return redirect('/venues/'.$venueId);
     }
 }

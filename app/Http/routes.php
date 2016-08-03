@@ -49,6 +49,10 @@ Route::group(['middleware' => 'auth'], function () {
      * Venue Routes
      */
     Route::get('/venues', 'VenueController@index');
+    Route::get('/venues/{id}', 'VenueController@venuePage');
+    Route::get('/venues/{id}/delete', 'VenueController@venueDelete');
+
+    Route::post('/venues/{id}/edit', 'VenueController@venueEdit');
     Route::post('/venues/create', 'VenueController@store');
 
     /*

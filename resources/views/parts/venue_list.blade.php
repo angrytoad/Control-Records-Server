@@ -10,6 +10,13 @@
                 <li><span>Email:</span> {{ $venue->contact_email }}</li>
                 <li><span>Tel:</span> {{ $venue->contact_telephone }}</li>
             </ul>
+            <div class="venue-options">
+                <a href="/venues/{{$venue->id}}">
+                    <button class="btn btn-info">
+                        Edit
+                    </button>
+                </a>
+            </div>
         </li>
     @endforeach
 @endif

@@ -24,7 +24,7 @@
             <label>Venue Email</label><input class="col-sm-12" type="text" name="contact-email" placeholder="Contact Email" />
         </div>
         <div>
-            <label>Venue Number</label><input class="col-sm-12" type="text" name="contact-telephone" placeholder="Contact Telephone" />
+            <label>Venue Telephone</label><input class="col-sm-12" type="text" name="contact-telephone" placeholder="Contact Telephone" />
         </div>
         <div>
             <label>Latitude</label><input type="text" id="latFld" name="latitude" />
