@@ -25,15 +25,35 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', 'HomeController@index');
 
+    /*
+     * Band Routes
+     */
     Route::get('/bands', 'BandController@index');
+    Route::get('/bands/{id}', 'BandController@bandPage');
+    Route::get('/bands/{id}/delete', 'BandController@bandDelete');
+
+    Route::post('/bands/{id}/edit', 'BandController@bandEdit');
     Route::post('/bands/create', 'BandController@store');
 
+    /*
+     * Gigs Routes
+     */
     Route::get('/gigs', 'GigsController@index');
+    Route::get('/gigs/{id}', 'GigsController@gigPage');
+    Route::get('/gigs/{id}/delete', 'GigsController@gigDelete');
+
+    Route::post('/gigs/{id}/edit', 'GigsController@gigEdit');
     Route::post('/gigs/create', 'GigsController@store');
 
+    /*
+     * Venue Routes
+     */
     Route::get('/venues', 'VenueController@index');
     Route::post('/venues/create', 'VenueController@store');
 
+    /*
+     * User Routes
+     */
     Route::get('/users', 'UserController@index');
     Route::post('/users', 'UserController@store');
 

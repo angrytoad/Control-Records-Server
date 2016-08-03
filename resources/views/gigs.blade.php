@@ -25,6 +25,13 @@
                                         <div>
                                         <h4>{{ $gig->band->name }}</h4>
                                         </div>
+                                        <div class="gig-options">
+                                            <a href="/gigs/{{$gig->id}}">
+                                                <button class="btn btn-info">
+                                                    Edit
+                                                </button>
+                                            </a>
+                                        </div>
                                     </li>
                                 @endforeach
                             @endif

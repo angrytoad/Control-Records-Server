@@ -64,4 +64,37 @@ class GigsController extends Controller
 
         return redirect('/gigs');
     }
+
+    public function gigPage($gigId){
+        $gig = Gig::find($gigId);
+        return view('gig/gig', array(
+            'gig' => $gig
+        ));
+    }
+
+    public function gigDelete($gigId){
+        $gig = Gig::find($gigId);
+        $gig->delete();
+
+        return redirect('/gigs');
+    }
+    
+    public function gigEdit(Request $request, $gigId){
+        $gig = Gig::find($gigId);
+        $gig->additional_comments = $request->input('additional-comments');
+        $gig->date = Carbon::parse($request->input('time'))->toDateTimeString();
+        $gig->save();
+
+        return redirect('/gigs/'.$gigId);
+    }
 }
+
+
+
+
+
+
+
+
+
+
