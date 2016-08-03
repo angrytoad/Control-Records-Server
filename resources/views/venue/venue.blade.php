@@ -105,7 +105,7 @@
                                 <img class="venue-static-image" src="http://maps.googleapis.com/maps/api/staticmap?center={{json_decode($venue->coordinates)->latitude}},{{json_decode($venue->coordinates)->longitude}}&zoom=15&scale=1&size=600x250&maptype=roadmap&key=AIzaSyDf2-w-MeO0DQexjZU8516ZRZ2XUb53S7M&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0x15ea55%7Clabel:%7C{{json_decode($venue->coordinates)->latitude}},{{json_decode($venue->coordinates)->longitude}}"/>
                             </div>
                             <div>
-                                <button class="btn btn-danger" onClick="venueOptions.deleteVenue({{$venue->id}})">Delete This Venue</button>
+                                <button class="btn btn-danger" onClick="venueOptions.deleteVenue()">Delete This Venue</button>
                                 <a href="http://ctrl-records.com/venue/{{$venue->id}}" target="_blank"><button class="btn btn-info">View Venue Page</button></a>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
     </div>
     <script>
         var venueOptions = {
-            deleteVenue: function($id){
+            deleteVenue: function(){
                 swal({
                     title: 'Are you sure?',
                     text: "This will also remove any gigs currently linked to this venue permanently",

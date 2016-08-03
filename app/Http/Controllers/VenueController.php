@@ -36,7 +36,7 @@ class VenueController extends Controller
     {
         $venues = DB::table('venues')->orderBy('venue_name','ASC')->get();
 
-        return view('venues', array(
+        return view('venue/venues', array(
             'venues' => $venues
         ));
     }

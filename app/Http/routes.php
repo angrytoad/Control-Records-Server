@@ -61,6 +61,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/users', 'UserController@index');
     Route::post('/users', 'UserController@store');
 
+    /*
+     * News Routes
+     */
+    Route::get('/news', 'NewsController@index');
+    Route::get('/news/create', 'NewsController@createPage');
+    Route::get('/news/{id}', 'NewsController@newsPage');
+    Route::get('/news/{id}/delete', 'NewsController@newsDelete');
+
+    Route::post('/news/create', 'NewsController@store');
+    Route::post('/news/{id}/edit', 'NewsController@newsEdit');
+
 });
 
 

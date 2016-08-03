@@ -34,7 +34,7 @@ class BandController extends Controller
     {
         $bands = Band::orderBy('name','ASC')->get();
 
-        return view('bands', array(
+        return view('band/bands', array(
             'bands' => $bands
         ));
     }

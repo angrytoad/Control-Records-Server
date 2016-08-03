@@ -41,7 +41,7 @@ class GigsController extends Controller
         $bands = Band::orderBy('name','ASC')->get();
 
 
-        return view('gigs', array(
+        return view('gig/gigs', array(
             'gigs' => $gigs,
             'venues' => $venues,
             'bands' => $bands
