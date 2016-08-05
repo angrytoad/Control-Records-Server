@@ -76,5 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['middleware' => 'cors', 'prefix' => 'api', 'namespace' => 'Api'], function () {
-    Route::get('gigs', 'ApiController@getAllGigs');
+    Route::get('gigs/all', 'ApiController@getAllGigs');
+    Route::get('news/all', 'ApiController@getAllNews');
+    Route::get('bands/all', 'ApiController@getAllBands');
 });

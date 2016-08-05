@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Gig;
+use App\News;
+use App\Band;
 
 class ApiController extends Controller
 {
@@ -33,6 +35,7 @@ class ApiController extends Controller
                 ],
                 'venue' => [
                     'name' => $gig->venue->venue_name,
+                    'id' => $gig->venue->id,
                     'coordinates' => json_decode($gig->venue->coordinates)
                 ],
                 'band' => $gig->band->name
@@ -42,6 +45,48 @@ class ApiController extends Controller
 
         return response()->json([
             'gigs' => $response
+        ]);
+    }
+
+    public function getAllNews()
+    {
+        $articles = News::orderBy('created_at','DESC')->get();
+
+        $response = array();
+        foreach($articles as $article){
+            $article = [
+                'article' => [
+                    'title' => $article->title,
+                    'body' => $article->body,
+                    'author' => $article->user->name,
+                    'id' => $article->id
+                ]
+            ];
+            array_push($response, $article);
+        }
+
+        return response()->json([
+            'articles' => $response
+        ]);
+    }
+
+    public function getAllBands()
+    {
+        $bands = Band::orderBy('name','ASC')->get();
+
+        $response = array();
+        foreach($bands as $band){
+            $band = [
+                'band' => [
+                    'name' => $band->name,
+                    'id' => $band->id
+                ]
+            ];
+            array_push($response, $band);
+        }
+
+        return response()->json([
+            'bands' => $response
         ]);
     }
 }
