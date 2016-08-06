@@ -61,6 +61,7 @@ class VenueController extends Controller
             'longitude' => $request->input('longitude')
         ]);
         $venue->coordinates = $coordinates;
+        $venue->url_safe_name = str_slug($request->input('venue-name'), '-');
         $venue->save();
 
         return redirect('/venues');
@@ -96,6 +97,7 @@ class VenueController extends Controller
             'longitude' => $request->input('longitude')
         ]);
         $venue->coordinates = $coordinates;
+        $venue->url_safe_name = str_slug($request->input('venue-name'), '-');
         $venue->save();
 
         return redirect('/venues/'.$venueId);

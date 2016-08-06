@@ -31,12 +31,14 @@ class ApiController extends Controller
             $gig = [
                 'gig' => [
                     'date' => $gig->date,
-                    'additional' => $gig->additional_comments
+                    'additional' => $gig->additional_comments,
+                    'id' => $gig->id
                 ],
                 'venue' => [
                     'name' => $gig->venue->venue_name,
                     'id' => $gig->venue->id,
-                    'coordinates' => json_decode($gig->venue->coordinates)
+                    'coordinates' => json_decode($gig->venue->coordinates),
+                    'url_name' => $gig->venue->url_safe_name
                 ],
                 'band' => $gig->band->name
             ];
@@ -79,7 +81,8 @@ class ApiController extends Controller
             $band = [
                 'band' => [
                     'name' => $band->name,
-                    'id' => $band->id
+                    'id' => $band->id,
+                    'url_name' => $band->url_safe_name
                 ]
             ];
             array_push($response, $band);
@@ -87,6 +90,23 @@ class ApiController extends Controller
 
         return response()->json([
             'bands' => $response
+        ]);
+    }
+    
+    public function getBandPage($url_name)
+    {
+        $band = Band::where('url_safe_name', $url_name)->first();
+
+        $response = [
+            'name' => $band->name,
+            'url_name' => $band->url_safe_name,
+            'extra' => [
+
+            ]
+        ];
+
+        return response()->json([
+            'band' => $response
         ]);
     }
 }

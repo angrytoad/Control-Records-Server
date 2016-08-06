@@ -52,6 +52,7 @@ class BandController extends Controller
         $band->primary_name = $request->input('primary_name');
         $band->primary_email = $request->input('primary_email');
         $band->primary_telephone = $request->input('primary_telephone');
+        $band->url_safe_name = str_slug($request->input('name'), '-');
         $band->save();
 
         return redirect('/bands');
@@ -77,6 +78,7 @@ class BandController extends Controller
         $band->primary_name = $request->input('primary_name');
         $band->primary_email = $request->input('primary_email');
         $band->primary_telephone = $request->input('primary_telephone');
+        $band->url_safe_name = str_slug($request->input('name'), '-');
         $band->save();
 
         return redirect('/bands/'.$bandId);

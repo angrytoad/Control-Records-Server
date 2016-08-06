@@ -79,4 +79,5 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api', 'namespace' => 'Api'], 
     Route::get('gigs/all', 'ApiController@getAllGigs');
     Route::get('news/all', 'ApiController@getAllNews');
     Route::get('bands/all', 'ApiController@getAllBands');
+    Route::get('bands/{url_name}', 'ApiController@getBandPage');
 });
