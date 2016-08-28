@@ -56,7 +56,9 @@ class BandAdditionalController extends Controller
 
     public function bandAdditionalPage($bandId){
         $bandAdditional = Band_Additional::find($bandId);
+        $band = Band::find($bandId);
         return view('band/bandAdditional', array(
+            'band' => $band,
             'bandAdditional' => $bandAdditional
         ));
     }
