@@ -6,6 +6,10 @@
     text-align: left;
 }
 
+.btn{
+    margin-top:5px;
+}
+
 #new-venue-form input{
     width:100%;
     margin-bottom:10px;
@@ -88,4 +92,44 @@
     margin-bottom:15px;
     display:inline-block;
     width:100%;
+}
+
+#banner-upload-form{
+    padding:10px;
+    background:rgba(0,0,0,0.1);
+    margin-bottom:5px;
+    margin-top:5px;
+    border-radius:4px;
+}
+
+#avatar-upload-form{
+    padding:10px;
+    background:rgba(0,0,0,0.1);
+    margin-bottom:5px;
+    border-radius:4px;
+}
+
+.additional-preview{
+    margin-top:20px;
+    padding:5px;
+    border:1px solid rgba(0,0,0,0.1);
+}
+
+.additional-preview img{
+    width:100%;
+    background:#4D4D4D;
+    padding:5px;
+}
+
+.color-brick{
+    border-radius:4px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.color-brick::after{
+    content: ' ';
+    height: 16px;
+    width: 16px;
+    display: inline-block;
 }

@@ -163,6 +163,11 @@ return [
          */
         Barryvdh\Cors\ServiceProvider::class,
 
+        /*
+         * Amazon Web Services SDK
+         */
+        Aws\Laravel\AwsServiceProvider::class,
+
     ],
 
     /*
@@ -208,6 +213,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'AWS' => Aws\Laravel\AwsFacade::class,
+        'Uuid' => Webpatser\Uuid\Uuid::class,
 
     ],
 

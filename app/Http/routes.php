@@ -30,10 +30,14 @@ Route::group(['middleware' => 'auth'], function () {
      */
     Route::get('/bands', 'BandController@index');
     Route::get('/bands/{id}', 'BandController@bandPage');
+    Route::get('/bands/{id}/additional', 'BandAdditionalController@bandAdditionalPage');
     Route::get('/bands/{id}/delete', 'BandController@bandDelete');
 
     Route::post('/bands/{id}/edit', 'BandController@bandEdit');
     Route::post('/bands/create', 'BandController@store');
+
+    Route::post('/bands/{id}/additional/banner', 'BandAdditionalController@storeBanner');
+    Route::post('/bands/{id}/additional/avatar', 'BandAdditionalController@storeAvatar');
 
     /*
      * Gigs Routes

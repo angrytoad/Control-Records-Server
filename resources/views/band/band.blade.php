@@ -40,7 +40,8 @@
                             </div>
                             <div>
                                 <button class="btn btn-danger" onClick="bandOptions.deleteBand({{$band->id}})">Delete This Band</button>
-                                <a href="http://ctrl-records.com/band/{{$band->id}}" target="_blank"><button class="btn btn-info">View Band Page</button></a>
+                                <a href="https://ctrl-records.com/band/{{$band->url_safe_name}}" target="_blank"><button class="btn btn-info">View Band Page</button></a>
+                                <a href="/bands/{{$band->id}}/additional"><button class="btn btn-info">Edit Additional Content</button></a>
                             </div>
                         </div>
                     </div>
