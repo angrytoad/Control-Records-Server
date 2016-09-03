@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="col-xs-6">
                                         <h4>Editor</h4>
-                                        <textarea oninput="this.editor.update()" class="col-sm-12" id="additional-about-body" name="about" placeholder="About the band">{{$band->band_additional->about}}</textarea>
+                                        <textarea oninput="this.editor.update()" class="col-sm-12" id="additional-about-body" name="about" placeholder="About the band">@if(isset($bandAdditional)){{$bandAdditional->about}}@endif</textarea>
                                     </div>
                                     <div class="col-xs-6">
                                         <h4>Preview</h4>
