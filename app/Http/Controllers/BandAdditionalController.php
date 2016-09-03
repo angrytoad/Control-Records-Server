@@ -9,7 +9,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
@@ -18,6 +17,7 @@ use DB;
 use App\Band_Additional;
 use App\Band;
 use AWS;
+use Faker\Provider\Uuid;
 use Mockery\CountValidator\Exception;
 
 class BandAdditionalController extends Controller

@@ -167,6 +167,11 @@ return [
          * Amazon Web Services SDK
          */
         Aws\Laravel\AwsServiceProvider::class,
+        
+        /*
+         * Uuid
+         */
+        Faker\Provider\Uuid::class,
 
     ],
 
