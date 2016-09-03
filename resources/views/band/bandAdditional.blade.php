@@ -4,14 +4,25 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container" id="band-additional">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{$band->name}} (Additional)</div>
                     <div class="panel-body">
-                        <div class="col-xs-12 col-lg-6">
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="col-xs-12">
                             <a href="/bands/{{$band->id}}"><button class="btn btn-info">Basic Info</button></a>
+                        </div>
+                        <div class="col-xs-12 col-lg-8">
                             <h2>Add Additional Content</h2>
 
                             <div class="alert alert-info">
@@ -42,8 +53,33 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button class="btn btn-success">Upload Avatar</button>
                             </form>
+                            <hr>
+                            <form id="band-about-form" method="post" action="/bands/{{$band->id}}/additional/about">
+
+
+                                <div id="about-editor">
+                                    <div class="col-xs-12">
+                                        <label>About The Band</label>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-success">Update About</button>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h4>Editor</h4>
+                                        <textarea oninput="this.editor.update()" class="col-sm-12" id="additional-about-body" name="about" placeholder="About the band">{{$band->band_additional->about}}</textarea>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h4>Preview</h4>
+                                        <div class="col-sm-12" id="preview"> </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </form>
+
+
+
                         </div>
-                        <div class="col-xs-12 col-lg-6">
+                        <div class="col-xs-12 col-lg-4">
                             <h2>Previews</h2>
                             <div class="alert alert-info">
                                 <p class="alert-info">
@@ -78,5 +114,18 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
+    <script>
+        function Editor(input, preview) {
+            this.update = function () {
+                preview.innerHTML = markdown.toHTML(input.value);
+            };
+            input.editor = this;
+            this.update();
+        }
+        var $id = function (id) { return document.getElementById(id); };
+        new Editor($id("additional-about-body"), $id("preview"));
+
+    </script>
 @endsection
 

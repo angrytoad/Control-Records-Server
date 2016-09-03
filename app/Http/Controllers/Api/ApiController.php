@@ -102,7 +102,8 @@ class ApiController extends Controller
             'url_name' => $band->url_safe_name,
             'extra' => [
                 'banner_url' => (isset($band->band_additional) ? $band->band_additional->band_banner_url : null),
-                'avatar_url' => (isset($band->band_additional) ? $band->band_additional->band_avatar_url : null)
+                'avatar_url' => (isset($band->band_additional) ? $band->band_additional->band_avatar_url : null),
+                'about' => (isset($band->band_additional) ? $band->band_additional->about : null),
             ]
         ];
 

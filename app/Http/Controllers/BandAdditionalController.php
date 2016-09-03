@@ -222,4 +222,17 @@ class BandAdditionalController extends Controller
         File::cleanDirectory('tmp/images/uploads');
         return redirect('/bands/'.$band->id.'/additional');
     }
+    
+    public function storeAbout(Request $request, $bandId){
+        $this->validate($request, [
+            'about' => 'required',
+        ]);
+
+        $band = Band::find($bandId);
+        $band_additional = Band_Additional::firstOrCreate(['band_id' => $band->id]);
+        $band_additional->about = $request->get('about');
+        $band_additional->save();
+
+        return redirect('/bands/'.$band->id.'/additional');
+    }
 }

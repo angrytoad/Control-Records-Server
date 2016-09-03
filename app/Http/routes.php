@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/bands/{id}/additional/banner', 'BandAdditionalController@storeBanner');
     Route::post('/bands/{id}/additional/avatar', 'BandAdditionalController@storeAvatar');
+    Route::post('/bands/{id}/additional/about', 'BandAdditionalController@storeAbout');
 
     /*
      * Gigs Routes

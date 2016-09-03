@@ -133,3 +133,29 @@
     width: 16px;
     display: inline-block;
 }
+
+#band-additional .alert{
+    width:100%;
+}
+
+#additional-about-body{
+    resize: none;
+    height:300px;
+    margin-bottom:20px;
+    width:100%;
+}
+
+#about-editor{
+    background: rgba(0,0,0,0.1);
+    display:inline-block;
+    width:100%;
+    margin-top:5px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+#band-additional #preview{
+    border: 1px solid white;
+    min-height:15px;
+    padding:10px;
+}
