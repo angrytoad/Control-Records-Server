@@ -55,7 +55,7 @@ class BandAdditionalController extends Controller
     }
 
     public function bandAdditionalPage($bandId){
-        $bandAdditional = Band_Additional::find($bandId);
+        $bandAdditional = Band_Additional::where('band_id',$bandId)->first();
         $band = Band::find($bandId);
         return view('band/bandAdditional', array(
             'band' => $band,

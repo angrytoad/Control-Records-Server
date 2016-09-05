@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Gig;
 use App\News;
 use App\Band;
+use Carbon\Carbon;
 
 class ApiController extends Controller
 {
@@ -61,7 +62,8 @@ class ApiController extends Controller
                     'title' => $article->title,
                     'body' => $article->body,
                     'author' => $article->user->name,
-                    'id' => $article->id
+                    'id' => $article->id,
+                    'url_name' => $article->url_safe_name
                 ]
             ];
             array_push($response, $article);
@@ -109,6 +111,22 @@ class ApiController extends Controller
 
         return response()->json([
             'band' => $response
+        ]);
+    }
+
+    public function getNewsPage($url_name)
+    {
+        $news = News::where('url_safe_name', $url_name)->first();
+
+        $response = [
+            'title' => $news->title,
+            'url_name' => $news->url_safe_name,
+            'created_at' => Carbon::parse($news->created_at)->toDayDateTimeString(),
+            'body' => $news->body
+        ];
+
+        return response()->json([
+            'news' => $response
         ]);
     }
 }

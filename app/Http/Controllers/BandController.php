@@ -12,6 +12,9 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
 use App\Band;
+use App\Band_Additional;
+use App\Gig;
+use AWS;
 
 class BandController extends Controller
 {
@@ -68,6 +71,29 @@ class BandController extends Controller
     public function bandDelete($bandId){
         $band = Band::find($bandId);
         $band->delete();
+        $bandAdditional = Band_Additional::where('band_id',$bandId)->first();
+        $gigs = Gig::where('band_id',$bandId)->delete();
+
+
+        if(isset($bandAdditional)) {
+            /**
+             * Create the initial AWS S3 Client
+             */
+            $s3 = AWS::createClient('s3');
+            if(isset($bandAdditional->band_banner_key)) {
+                $banner = $s3->deleteObject([
+                    'Bucket' => env('S3_BUCKET_GENERAL_STORAGE'), // REQUIRED
+                    'Key' => 'images/bands/banners/'.$bandAdditional->band_banner_key
+                ]);
+            }
+            if(isset($bandAdditional->band_avatar_key)) {
+                $avatar = $s3->deleteObject([
+                    'Bucket' => env('S3_BUCKET_GENERAL_STORAGE'), // REQUIRED
+                    'Key' => 'images/bands/avatars/'.$bandAdditional->band_avatar_key
+                ]);
+            }
+            $bandAdditional->delete();
+        }
 
         return redirect('/bands');
     }
