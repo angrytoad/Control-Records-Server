@@ -98,7 +98,7 @@ class ApiController extends Controller
     public function getBandPage($url_name)
     {
         $band = Band::where('url_safe_name', $url_name)->first();
-
+        $gigs = Gig::where('band_id', $band->id)->with('venue')->where('date','>=',Carbon::now())->get();
         $response = [
             'name' => $band->name,
             'url_name' => $band->url_safe_name,
@@ -106,7 +106,8 @@ class ApiController extends Controller
                 'banner_url' => (isset($band->band_additional) ? $band->band_additional->band_banner_url : null),
                 'avatar_url' => (isset($band->band_additional) ? $band->band_additional->band_avatar_url : null),
                 'about' => (isset($band->band_additional) ? $band->band_additional->about : null),
-            ]
+            ],
+            'gigs' => (count($gigs) > 0 ? $gigs : null)
         ];
 
         return response()->json([
