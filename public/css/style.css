@@ -159,3 +159,15 @@
     min-height:15px;
     padding:10px;
 }
+
+.venue-logo{
+    padding:20px;
+    background:#f5f5f5;
+    border:1px solid #ddd;
+    border-radius:4px;
+    margin-bottom:10px;
+}
+
+.venue-logo img{
+    width:100%;
+}

@@ -10,8 +10,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use DB;
 use App\Band_Additional;

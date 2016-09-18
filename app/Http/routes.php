@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/venues/{id}/edit', 'VenueController@venueEdit');
     Route::post('/venues/create', 'VenueController@store');
+    Route::post('/venues/{id}/additional/logo', 'VenueController@storeLogo');
 
     /*
      * User Routes
@@ -84,6 +85,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api', 'namespace' => 'Api'], 
     Route::get('gigs/all', 'ApiController@getAllGigs');
     Route::get('news/all', 'ApiController@getAllNews');
     Route::get('bands/all', 'ApiController@getAllBands');
+    Route::get('venues/all', 'ApiController@getAllVenues');
     Route::get('bands/{url_name}', 'ApiController@getBandPage');
     Route::get('news/{url_name}', 'ApiController@getNewsPage');
 });

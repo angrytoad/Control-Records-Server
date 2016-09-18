@@ -33,10 +33,28 @@
                                 <div>
                                     <label>Longitude</label><input class="col-sm-12" type="text" id="lngFld" name="longitude" value="{{json_decode($venue->coordinates)->longitude}}"/>
                                 </div>
+                                <div>
+                                    <label>Show on Homepage?</label>
+                                    {{ Form::hidden('show_on_homepage', false) }}
+                                    {{ Form::checkbox('show_on_homepage', true, $venue->show_on_homepage) }}
+                                </div>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button class="btn">Edit Venue</button>
                             </form>
-
+                            <hr>
+                            @if (session('upload_error'))
+                                <div class="alert alert-danger">
+                                    {{ session('upload_error') }}
+                                </div>
+                            @endif
+                            <form id="venue-logo-form" method="post" action="/venues/{{$venue->id}}/additional/logo" enctype="multipart/form-data">
+                                <div>
+                                    <label>Add a logo to this venue</label>
+                                    <input type="file" name="logo" class="col-xs-12" />
+                                </div>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <button class="btn">Upload Logo</button>
+                            </form>
 
 
 
@@ -98,6 +116,13 @@
                         <div class="col-sm-12 col-md-6">
                             <h4>Venue Information</h4>
                             <div>
+                                @if(!empty($venue->venue_logo_url))
+                                    <div class="venue-logo">
+                                        <i>Uploading a new logo may not immediately take effect due to caching, if the image doesn't change refresh the page in a few seconds.</i>
+                                        <hr>
+                                        <img src={{$venue->venue_logo_url}} />
+                                    </div>
+                                @endif
                                 <p><strong>Name: </strong>{{$venue->venue_name}}</p>
                                 <p><strong>Primary Contact: </strong>{{$venue->contact_name}}</p>
                                 <p><strong>Primary Email: </strong>{{$venue->contact_email}}</p>
@@ -106,7 +131,7 @@
                             </div>
                             <div>
                                 <button class="btn btn-danger" onClick="venueOptions.deleteVenue()">Delete This Venue</button>
-                                <a href="http://ctrl-records.com/venue/{{$venue->id}}" target="_blank"><button class="btn btn-info">View Venue Page</button></a>
+                                <a href="http://ctrl-records.com/venue/{{$venue->url_safe_name}}" target="_blank"><button class="btn btn-info">View Venue Page</button></a>
                             </div>
                         </div>
                     </div>

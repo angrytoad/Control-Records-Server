@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Gig;
 use App\News;
 use App\Band;
+use App\Venue;
 use Carbon\Carbon;
 
 class ApiController extends Controller
@@ -92,6 +93,25 @@ class ApiController extends Controller
 
         return response()->json([
             'bands' => $response
+        ]);
+    }
+
+    public function getAllVenues()
+    {
+        $venues = Venue::orderBy('venue_name','ASC')->where('show_on_homepage',true)->get();
+
+        $response = array();
+        foreach($venues as $venue){
+            $venue = [
+                'name' => $venue->venue_name,
+                'location' => \GuzzleHttp\json_decode($venue->coordinates),
+                'url_safe_name' => $venue->url_safe_name
+            ];
+            array_push($response, $venue);
+        }
+
+        return response()->json([
+            'venues' => $response
         ]);
     }
     
