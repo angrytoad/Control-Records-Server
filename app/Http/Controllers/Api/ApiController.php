@@ -100,6 +100,7 @@ class ApiController extends Controller
     public function getAllVenues()
     {
         $venues = Venue::orderBy('venue_name','ASC')->where('show_on_homepage',true)->get();
+        $venues = $venues->shuffle();
 
         $response = array();
         foreach($venues as $venue){
