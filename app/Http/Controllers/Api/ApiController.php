@@ -105,7 +105,8 @@ class ApiController extends Controller
             $venue = [
                 'name' => $venue->venue_name,
                 'location' => \GuzzleHttp\json_decode($venue->coordinates),
-                'url_safe_name' => $venue->url_safe_name
+                'url_safe_name' => $venue->url_safe_name,
+                'logo' => $venue->venue_logo_url
             ];
             array_push($response, $venue);
         }
