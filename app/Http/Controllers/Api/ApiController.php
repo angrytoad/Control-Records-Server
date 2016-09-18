@@ -85,7 +85,8 @@ class ApiController extends Controller
                 'band' => [
                     'name' => $band->name,
                     'id' => $band->id,
-                    'url_name' => $band->url_safe_name
+                    'url_name' => $band->url_safe_name,
+                    'avatar' => (isset($band->band_additional) ? $band->band_additional->band_avatar_url : '')
                 ]
             ];
             array_push($response, $band);
