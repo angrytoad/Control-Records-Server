@@ -88,4 +88,5 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api', 'namespace' => 'Api'], 
     Route::get('venues/all', 'ApiController@getAllVenues');
     Route::get('bands/{url_name}', 'ApiController@getBandPage');
     Route::get('news/{url_name}', 'ApiController@getNewsPage');
+    Route::get('venue/{url_name}', 'ApiController@getVenuePage');
 });

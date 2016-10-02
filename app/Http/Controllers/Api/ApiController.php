@@ -153,4 +153,22 @@ class ApiController extends Controller
             'news' => $response
         ]);
     }
+
+    public function getVenuePage($url_name)
+    {
+        $venue = Venue::where('url_safe_name', $url_name)->first();
+        $gigs = Gig::where('venue_id',$venue->id)->whereDate('date','>=',Carbon::today()->toDateString())->with('venue')->with('band')->orderBy('date','ASC')->get();
+
+        $response = [
+            'name' => $venue->venue_name,
+            'url_name' => $venue->url_safe_name,
+            'location' => \GuzzleHttp\json_decode($venue->coordinates),
+            'logo' => $venue->venue_logo_url,
+            'gigs'  => $gigs
+        ];
+
+        return response()->json([
+            'venue' => $response
+        ]);
+    }
 }
