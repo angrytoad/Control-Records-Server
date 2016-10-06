@@ -60,6 +60,7 @@ class NewsController extends Controller
         $news->title = $request->input('title');
         $news->body = $request->input('body');
         $news->user_id = $request->user()->id;
+        $news->url_safe_name = str_slug($request->input('title'), '-');
         $news->save();
 
         return redirect('/news');
