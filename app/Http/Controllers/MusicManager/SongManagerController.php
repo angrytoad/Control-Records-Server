@@ -22,7 +22,8 @@ class SongManagerController extends Controller
         'flac',
         'ogg',
         'aac',
-        'mpga'
+        'mpga',
+        'm4a'
     ];
 
     /**
