@@ -10,9 +10,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use DB;
+use Exception;
 use AWS;
 use Faker\Provider\Uuid;
-use Mockery\CountValidator\Exception;
 
 class SongManagerController extends Controller
 {
@@ -146,7 +146,7 @@ class SongManagerController extends Controller
             $song->band_id = $request['song-artist'];
             $song->save();
             $song->albums()->sync($request['song-album']);
-        }catch(\Exception $e){
+        }catch(Exception $e){
             return redirect('/music/song/'.$uuid)->with('upload_error', $e->getMessage());
         }
 
