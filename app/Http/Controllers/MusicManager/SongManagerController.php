@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\File;
 use DB;
 use AWS;
 use Faker\Provider\Uuid;
-use Mockery\CountValidator\Exception;
 
 class SongManagerController extends Controller
 {
