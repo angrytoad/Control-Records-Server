@@ -150,7 +150,7 @@ class SongManagerController extends Controller
             return redirect('/music/song/'.$uuid)->with('upload_error', $e->getMessage());
         }
 
-        File::cleanDirectory('tmp/images/uploads');
+        File::cleanDirectory('tmp/audio/uploads');
         return redirect('/music/song/'.$uuid);
 
     }
@@ -265,7 +265,7 @@ class SongManagerController extends Controller
             return redirect('/music/songs/create')->with('upload_error', $e->getMessage());
         }
 
-        File::cleanDirectory('tmp/images/uploads');
+        File::cleanDirectory('tmp/audio/uploads');
         return redirect('/music/songs');
     }
 }
