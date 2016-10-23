@@ -78,6 +78,34 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/news/create', 'NewsController@store');
     Route::post('/news/{id}/edit', 'NewsController@newsEdit');
 
+    
+    /*
+     * Music Manager
+     */
+
+    Route::group(['prefix' => 'music', 'namespace' => 'MusicManager'], function () {
+        Route::get('/', 'MusicManagerController@index');
+
+        /*
+         * Albums
+         */
+        Route::get('/albums', 'AlbumManagerController@index');
+        Route::get('/albums/create', 'AlbumManagerController@create');
+        Route::post('/albums/create', 'AlbumManagerController@storeCreate');
+
+        Route::get('/album/{id}', 'AlbumManagerController@albumIndex');
+        
+        /*
+         * Songs
+         */
+        Route::get('/songs', 'SongManagerController@index');
+        Route::get('/songs/create', 'SongManagerController@create');
+        Route::post('/songs/create', 'SongManagerController@storeCreate');
+
+        Route::get('/song/{id}', 'SongManagerController@songIndex');
+        Route::post('/song/{id}/edit', 'SongManagerController@songEdit');
+        Route::get('/song/{id}/delete', 'SongManagerController@songDelete');
+    });
 });
 
 

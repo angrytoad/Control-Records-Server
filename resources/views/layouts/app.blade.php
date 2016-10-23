@@ -63,6 +63,7 @@
                                 Managers <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/music') }}">Music Manager</a></li>
                                 <li><a href="{{ url('/bands') }}">Band Manager</a></li>
                                 <li><a href="{{ url('/venues') }}">Venue Manager</a></li>
                                 <li><a href="{{ url('/gigs') }}">Gig Manager</a></li>
@@ -70,7 +71,16 @@
                                 <li><a href="{{ url('/news') }}">News Manager</a></li>
                             </ul>
                         </li>
-
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Music Manager <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/music') }}">Overview</a></li>
+                                <li><a href="{{ url('/music/albums') }}">Albums</a></li>
+                                <li><a href="{{ url('/music/songs') }}">Songs</a></li>
+                            </ul>
+                        </li>
                     @endif
                 </ul>
 

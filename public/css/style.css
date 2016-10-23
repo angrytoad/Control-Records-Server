@@ -171,3 +171,268 @@
 .venue-logo img{
     width:100%;
 }
+
+.stats-table td{
+    font-size:1.8rem;
+}
+
+.stats-table td:first-child{
+    text-align: right;
+    padding-right:10px;
+}
+
+.stats-table td:nth-child(2){
+    font-weight:bold;
+}
+
+
+
+/*
+    Music Manager
+*/
+
+#vital-statistics{
+    padding:20px;
+    background:#f5f5f5;
+    border:1px solid #ddd;
+}
+
+.latest-uploads-wrapper{
+    text-align: left;
+    background:#f5f5f5;
+    border:1px solid #ddd;
+    padding:20px;
+    margin:0px;
+    margin-bottom:20px;
+}
+
+.latest-uploads-wrapper:last-child{
+    margin-bottom:0px;
+}
+
+
+/*
+    Album Stuff
+*/
+
+.albums-wrapper{
+    text-align: center;
+}
+
+.album-wrapper{
+    position: relative;
+    display:inline-block;
+    margin:10px;
+    width:auto;
+}
+
+.album-wrapper img{
+    position: relative;
+    width:200px;
+    height:200px;
+}
+
+.album-wrapper p{
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 10px 10px;
+    background: rgba(0,0,0,0.6);
+    font-weight: 300;
+    font-size: 2.2rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+}
+
+.album-wrapper i{
+    font-size:44px;
+    position: absolute;
+    top:5px;
+    left:5px;
+    margin:0px;
+}
+
+.album-wrapper i.public{
+    color:#69D651;
+}
+
+.album-wrapper i.private{
+    color:#DD5252;
+}
+
+/*
+    Song Stuff
+*/
+
+.songs-wrapper ul{
+    padding:0px;
+}
+
+.songs-wrapper li{
+    list-style-type:none;
+}
+
+.songs-wrapper > ul > li{
+    background:#f5f5f5;
+    display:inline-block;
+    width:100%;
+    padding:5px;
+}
+
+.songs-wrapper ul li > div{
+    padding:0px;
+}
+
+.songs-wrapper audio{
+    width:160px;
+    background:#f5f5f5;
+    vertical-align: top;
+}
+
+.songs-wrapper h4{
+    margin:0px;
+    font-size:2.2rem;
+    padding-left:10px;
+    margin-top: 3px;
+    border-left:2px solid black;
+}
+
+.songs-wrapper h4.no-border{
+    border-left:0px;
+}
+
+.songs-wrapper ul li ul{
+    display:inline-block;
+    vertical-align: top;
+    padding:0px;
+    text-align: left;
+}
+
+.songs-wrapper ul li ul li{
+    list-style-type:none;
+    display:inline-block;
+    margin-left:3px;
+    margin-right:3px;
+}
+
+.song-album-teaser{
+    width:32px;
+}
+
+.song-in-album img{
+    width:128px;
+    height:128px;
+    display:inline-block;
+}
+
+.songs-in-album{
+    text-align: left;
+    background:#f5f5f5;
+    border:1px solid #ddd;
+    padding:20px;
+    margin:0px;
+}
+
+.songs-in-album h4{
+    margin:0px;
+    margin-bottom:20px;
+}
+
+.songs-in-album li{
+    display:inline-block;
+    list-style-type:none;
+}
+
+.songs-in-album-wrapper{
+    margin-top:20px;
+}
+
+.song-listener{
+
+}
+
+.no-left{
+    padding-left:0px;
+}
+
+.song-audio-wrapper{
+    background:#f5f5f5;
+    border:1px solid #ddd;
+    display:inline-block;
+    padding:10px;
+    width:100%;
+    margin-top:20px;
+}
+
+.song-audio-wrapper:first-child{
+
+}
+
+.song-audio-wrapper audio{
+    display:inline-block;
+    width:100%;
+    background:#f5f5f5;
+}
+
+.song-edit{
+    margin-top:20px;
+    background:#f5f5f5;
+    border:1px solid #ddd;
+    padding:10px;
+    display:inline-block;
+    width:100%;
+}
+
+.other-works{
+    margin-top:20px;
+    background:#f5f5f5;
+    border:1px solid #ddd;
+    padding:10px;
+    display:inline-block;
+    width:100%;
+}
+
+.other-works ul,.latest-uploads-wrapper ul{
+    padding:0px;
+}
+
+.other-works ul li,.latest-uploads-wrapper ul li{
+    list-style-type:none;
+    display:inline-block;
+    width:100%;
+}
+
+.other-works ul > li,.latest-uploads-wrapper ul > li{
+    background:#DDDDDD;
+    padding:5px;
+}
+
+.other-works ul li audio,.latest-uploads-wrapper ul li audio{
+    width:160px;
+    display:inline-block;
+    vertical-align: top;
+}
+
+.other-works ul li > a,.latest-uploads-wrapper ul li > a{
+    display:inline-block;
+}
+
+.other-works ul li a h4,.latest-uploads-wrapper ul li a h4{
+    margin:0px;
+    margin-top:5px;
+    margin-left:15px;
+    display:inline-block;
+}
+
+.latest-uploads-wrapper .album-upload{
+    display:inline-block;
+    width:20%;
+}
+
+.latest-uploads-wrapper .album-upload img{
+    width:100%;
+}
+
