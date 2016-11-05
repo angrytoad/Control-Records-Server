@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MusicManager;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Album;
+use App\Song;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -58,10 +59,53 @@ class AlbumManagerController extends Controller
 
     public function albumIndex($uuid)
     {
-        $album = Album::where('id',$uuid)->first();
+        $album = Album::where('id',$uuid)->with('songs')->first();
         return view('music_manager/albums/album/index', array(
             'album' => $album
         ));
+    }
+
+    public function albumDelete($uuid){
+        $album = Album::find($uuid);
+        $album->songs()->detach();
+        $s3 = AWS::createClient('s3');
+
+        $album_image = $s3->deleteObject([
+            'Bucket' => env('S3_BUCKET_GENERAL_STORAGE'), // REQUIRED
+            'Key' => 'images/albums/'.$album->album_image
+        ]);
+
+        $album->delete();
+        return redirect('/music/albums');
+    }
+
+    public function albumSongDelete($uuid, $song_uuid){
+        $song = Song::find($song_uuid);
+        $song->albums()->detach($uuid);
+        $song->save();
+        return redirect('/music/album/'.$uuid);
+    }
+
+    public function albumUnlinkAll($uuid){
+        $album = Album::find($uuid);
+        $album->songs()->detach();
+        $album->public = false;
+        $album->save();
+        return redirect('/music/album/'.$uuid);
+    }
+
+    public function albumMakePrivate($uuid){
+        $album = Album::find($uuid);
+        $album->public = false;
+        $album->save();
+        return redirect('/music/album/'.$uuid);
+    }
+
+    public function albumMakePublic($uuid){
+        $album = Album::find($uuid);
+        $album->public = true;
+        $album->save();
+        return redirect('/music/album/'.$uuid);
     }
 
     public function storeCreate(Request $request)

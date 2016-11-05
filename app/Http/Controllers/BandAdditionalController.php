@@ -16,7 +16,7 @@ use App\Band_Additional;
 use App\Band;
 use AWS;
 use Faker\Provider\Uuid;
-use Mockery\CountValidator\Exception;
+use Exception;
 
 class BandAdditionalController extends Controller
 {
@@ -131,7 +131,7 @@ class BandAdditionalController extends Controller
                 }else{
                     throw new Exception('You are uploading a file which is not allowed, please use .jpg, .jpeg, .png or .gif');
                 }
-            }catch(\Exception $e){
+            }catch(Exception $e){
                 return redirect('/bands/'.$band->id.'/additional')->with('upload_error', $e->getMessage());
             }
         }
@@ -212,7 +212,7 @@ class BandAdditionalController extends Controller
                 }else{
                     throw new Exception('You are uploading a file which is not allowed, please use .jpg, .jpeg, .png or .gif');
                 }
-            }catch(\Exception $e){
+            }catch(Exception $e){
                 return redirect('/bands/'.$band->id.'/additional')->with('upload_error', $e->getMessage());
             }
         }

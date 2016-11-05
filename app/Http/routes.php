@@ -94,6 +94,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/albums/create', 'AlbumManagerController@storeCreate');
 
         Route::get('/album/{id}', 'AlbumManagerController@albumIndex');
+        Route::get('/album/{id}/{song_uuid}/delete', 'AlbumManagerController@albumSongDelete');
+        Route::get('/album/{id}/delete', 'AlbumManagerController@albumDelete');
+        Route::get('/album/{id}/unlink', 'AlbumManagerController@albumUnlinkAll');
+        Route::get('/album/{id}/private', 'AlbumManagerController@albumMakePrivate');
+        Route::get('/album/{id}/public', 'AlbumManagerController@albumMakePublic');
         
         /*
          * Songs

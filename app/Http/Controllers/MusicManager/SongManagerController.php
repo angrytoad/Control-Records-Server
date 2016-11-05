@@ -262,7 +262,7 @@ class SongManagerController extends Controller
             }else{
                 throw new Exception('You are uploading a file which is not allowed, please use .mp3 .wav .flac .ogg or .aac');
             }
-        }catch(\Exception $e){
+        }catch(Exception $e){
             return redirect('/music/songs/create')->with('upload_error', $e->getMessage());
         }
 
