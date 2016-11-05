@@ -110,6 +110,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/song/{id}', 'SongManagerController@songIndex');
         Route::post('/song/{id}/edit', 'SongManagerController@songEdit');
         Route::get('/song/{id}/delete', 'SongManagerController@songDelete');
+        Route::get('/song/{id}/private', 'SongManagerController@songMakePrivate');
+        Route::get('/song/{id}/public', 'SongManagerController@songMakePublic');
     });
 });
 

@@ -1,11 +1,3 @@
-.alert{
-    width:350px;
-    margin:auto;
-    color: red;
-    font-weight: 700;
-    text-align: left;
-}
-
 .btn{
     margin-top:5px;
 }
@@ -267,6 +259,23 @@
     Song Stuff
 */
 
+.song-title span{
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 4px;
+}
+
+.song-title .private{
+    background: #DD5252;
+}
+
+.song-title .public{
+    background:#69D651;
+}
+
 .songs-wrapper ul{
     padding:0px;
 }
@@ -464,8 +473,45 @@
     opacity:0.7;
 }
 
+.song-lister .public{
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+    background:#69D651;
+    vertical-align: top;
+    margin-top: 4px;
+}
+
+.song-lister .private{
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+    background: #DD5252;
+    vertical-align: top;
+    margin-top: 4px;
+}
+
 .album-title{
 
+}
+
+.album-title span{
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: -4px;
+    vertical-align: middle;
+}
+
+.album-title .private{
+    background: #DD5252;
+}
+
+.album-title .public{
+    background:#69D651;
 }
 
 .album-title img{
@@ -476,26 +522,14 @@
     display:inline-block;
     width:100%;
     margin-top:20px;
-    margin-bottom:20px;
-    border-radius:4px;
-    overflow:hidden;
-    text-align: center;
-    color:white;
 }
 
-.album-privacy-wrapper h3{
-    margin:0px;
-    padding:10px;
+.song-privacy-wrapper{
+    display:inline-block;
+    width:100%;
+    margin-top:20px;
 }
 
-.album-privacy-wrapper .public{
-    background:#69D651;
-}
-
-.album-privacy-wrapper .private{
-    background:#DD5252;
-
-}
 
 .private-text{
    color:#DD5252;

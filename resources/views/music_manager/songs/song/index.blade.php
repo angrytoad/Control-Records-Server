@@ -11,10 +11,33 @@
                         <a href="/music"><button class="btn btn-info">Music Manager</button></a>
                         <a href="/music/songs"><button class="btn btn-info">Songs List</button></a>
                         <button class="btn btn-danger pull-right" onClick="confirmDeletion()">Delete Song</button>
+                        @if($song->public)
+                            <button onClick="makePrivate('/music/song/{{$song->id}}/private')" class="btn btn-warning">Hide song from store</button>
+                        @else
+                            <button onClick="makePublic('/music/song/{{$song->id}}/public')" class="btn btn-warning">Publish song to store</button>
+                        @endif
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-6 no-left">
-                    <h2>{{$song->song_name}}</h2>
+                    <div class="song-privacy-wrapper">
+                        @if($song->public)
+                            <div class="alert alert-success">
+                                This Song is currently <strong>AVAILABLE</strong> on the store.
+                            </div>
+                        @else
+                            <div class="alert alert-danger">
+                                This Song is currently <strong>NOT AVAILABLE</strong> on the store.
+                            </div>
+                        @endif
+                    </div>
+                    <h2 class="song-title">
+                        @if($song->public)
+                            <span title="This song is public" class="public"></span>
+                        @else
+                            <span title="This song is private" class="private"></span>
+                        @endif
+                        {{$song->song_name}}
+                    </h2>
                     <p>By <a href="/bands/{{$band->id}}">{{ $band->name }}</a></p>
                     <div class="song-listener">
                         <div class="song-audio-wrapper">
@@ -136,6 +159,34 @@
         </div>
     </div>
     <script>
+        function makePrivate(link){
+            swal({
+                title: 'Confirm private setting',
+                text: "If you make this song PRIVATE, it will not longer be visible from the store.",
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Make Private'
+            }).then(function() {
+                window.location.href = link;
+            })
+        }
+
+        function makePublic(link){
+            swal({
+                title: 'Confirm public setting',
+                text: "If you make this song PUBLIC it will be visible on the store.",
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Make Public'
+            }).then(function() {
+                window.location.href = link;
+            })
+        }
+
         function confirmDeletion(){
             swal({
                 title: 'Are you sure?',

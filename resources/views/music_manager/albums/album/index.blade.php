@@ -13,26 +13,52 @@
                 </div>
                 <div class="album-privacy-wrapper">
                     @if($album->public)
-                        <div class="public"><h3>This Album is Currently On The Store</h3></div>
+                        <div class="alert alert-success">
+                            This Album is currently <strong>AVAILABLE</strong> on the store.
+                        </div>
                     @else
-                        <div class="private"><h3>This Album is Currently Hidden On The Store</h3></div>
+                        <div class="alert alert-danger">
+                            This Album is currently <strong>NOT AVAILABLE</strong> on the store.
+                        </div>
                     @endif
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <h2 class="album-title"><img src="{{$album->album_image_url}}"/> {{$album->album_name}}</h2>
+                    <h2 class="album-title">
+                        @if($album->public)
+                            <span title="This album is public" class="public"></span>
+                        @else
+                            <span title="This album is private" class="private"></span>
+                        @endif
+                        <img src="{{$album->album_image_url}}"/>
+                        {{$album->album_name}}
+                    </h2>
                     <hr>
                     <h4>Store Options</h4>
+                    @if($songs_public < count($album->songs))
+                        <div class="alert alert-warning col-xs-12">
+                            <strong>Warning!</strong> You have some songs in this album that aren't set to public and so won't appear on the store.
+                        </div>
+                    @endif
                     @if($album->public)
                         <button onClick="makePrivate('/music/album/{{$album->id}}/private')" class="btn btn-warning">Hide album from store</button>
                     @else
-                        <button onClick="makePublic('/music/album/{{$album->id}}/public')" class="btn btn-info">Publish album to store</button>
+                        @if($songs_public > 0)
+                            <button onClick="makePublic('/music/album/{{$album->id}}/public')" class="btn btn-info">Publish album to store</button>
+                        @else
+                            <button class="btn btn-info disabled">You require 1 public song to publish this album</button>
+                        @endif
                     @endif
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <h2>Song List</h2>
+                    <h2>Song List <small>({{$songs_public}}/{{count($album->songs)}} songs public)</small></h2>
                     <ul class="song-lister">
                         @foreach($album->songs as $song)
                             <li>
+                                @if($song->public)
+                                    <span title="This song is public" class="public"></span>
+                                @else
+                                    <span title="This song is private" class="private"></span>
+                                @endif
                                 {{$song->song_name}} - <i>{{$song->band->name}}</i>
                                 <div>
                                     Actions:

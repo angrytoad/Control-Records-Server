@@ -66,6 +66,20 @@ class SongManagerController extends Controller
         ));
     }
 
+    public function songMakePrivate($uuid){
+        $song = Song::find($uuid);
+        $song->public = false;
+        $song->save();
+        return redirect('/music/song/'.$uuid);
+    }
+
+    public function songMakePublic($uuid){
+        $song = Song::find($uuid);
+        $song->public = true;
+        $song->save();
+        return redirect('/music/song/'.$uuid);
+    }
+
     public function songIndex($uuid)
     {
         $song = Song::where('id', $uuid)->first();
@@ -236,6 +250,7 @@ class SongManagerController extends Controller
                         $song->song_id = $paid_uuid;
                         $song->sample_id = $sample_uuid;
                         $song->sample_url = $sample_result['ObjectURL'];
+                        $song->public = false;
 
                         $paid_result = $s3->putObject([
                             'ACL' => "private",

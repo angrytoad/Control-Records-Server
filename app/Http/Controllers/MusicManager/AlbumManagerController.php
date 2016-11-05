@@ -60,8 +60,15 @@ class AlbumManagerController extends Controller
     public function albumIndex($uuid)
     {
         $album = Album::where('id',$uuid)->with('songs')->first();
+        $amountPublic = 0;
+        foreach($album->songs as $song){
+            if($song->public){
+                $amountPublic += 1;
+            }
+        }
         return view('music_manager/albums/album/index', array(
-            'album' => $album
+            'album' => $album,
+            'songs_public' => $amountPublic
         ));
     }
 
