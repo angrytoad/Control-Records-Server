@@ -115,7 +115,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-
+/*
+ * API Routes
+ */
 Route::group(['middleware' => 'cors', 'prefix' => 'api', 'namespace' => 'Api'], function () {
     Route::get('gigs/all', 'ApiController@getAllGigs');
     Route::get('news/all', 'ApiController@getAllNews');
@@ -124,4 +126,11 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api', 'namespace' => 'Api'], 
     Route::get('bands/{url_name}', 'ApiController@getBandPage');
     Route::get('news/{url_name}', 'ApiController@getNewsPage');
     Route::get('venue/{url_name}', 'ApiController@getVenuePage');
+
+    /*
+     * Store Related API
+     */
+    Route::group(['prefix' => 'store', 'namespace' => 'Store'], function () {
+        Route::get('/search/{search_string}', 'StoreController@storeSearch');
+    });
 });

@@ -169,6 +169,11 @@ return [
          */
         Aws\Laravel\AwsServiceProvider::class,
 
+        /*
+         * Eloquence
+         */
+        Sofa\Eloquence\ServiceProvider::class,
+
     ],
 
     /*

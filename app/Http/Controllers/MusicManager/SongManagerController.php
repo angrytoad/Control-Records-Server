@@ -159,6 +159,7 @@ class SongManagerController extends Controller
 
             $song->song_name = $request['song-name'];
             $song->band_id = $request['song-artist'];
+            $song->url_safe_name = str_slug($request['song-name'], '-');
             $song->save();
             $song->albums()->sync($request['song-album']);
         }catch(Exception $e){
@@ -246,6 +247,7 @@ class SongManagerController extends Controller
                         $song = new Song();
                         $song->id = Uuid::uuid();
                         $song->song_name = $request['song-name'];
+                        $song->url_safe_name = str_slug($request['song-name'], '-');
                         $song->band_id = $request['song-artist'];
                         $song->song_id = $paid_uuid;
                         $song->sample_id = $sample_uuid;

@@ -166,6 +166,7 @@ class AlbumManagerController extends Controller
                         'album_name' => $request['album-name'],
                         'album_image' => $uuid,
                         'album_image_url' => $result['ObjectURL'],
+                        'url_safe_name' => str_slug($request['album-name'], '-'),
                         'public' => false
                     ]);
 

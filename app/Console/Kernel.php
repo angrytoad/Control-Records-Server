@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
-        Commands\MakeNewsURLSafe::class
+        Commands\MakeNewsURLSafe::class,
+        Commands\MakeSongsAlbumsURLSafe::class
     ];
 
     /**

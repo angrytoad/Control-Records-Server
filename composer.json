@@ -13,7 +13,8 @@
         "webpatser/laravel-uuid": "2.*",
         "league/flysystem-aws-s3-v3": "~1.0",
         "fzaninotto/faker": "~1.4",
-        "laravelcollective/html": "5.2.*"
+        "laravelcollective/html": "5.2.*",
+        "sofa/eloquence": "~5.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
