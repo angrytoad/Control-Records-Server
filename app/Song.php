@@ -36,4 +36,9 @@ class Song extends Model
     {
         return $this->belongsTo('App\Band');
     }
+
+    public function band_additional()
+    {
+        return $this->hasOne('App\Band_Additional');
+    }
 }

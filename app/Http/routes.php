@@ -113,6 +113,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/song/{id}/private', 'SongManagerController@songMakePrivate');
         Route::get('/song/{id}/public', 'SongManagerController@songMakePublic');
     });
+
+
+    /*
+     *
+     */
+    Route::group(['prefix' => 'store', 'namespace' => 'Api\Store'], function () {
+        Route::get('config', 'StoreConfigurationController@index');
+        Route::post('config/create', 'StoreConfigurationController@store');
+        Route::get('config/{id}/activate', 'StoreConfigurationController@setActiveConfiguration');
+        Route::get('config/{id}/delete', 'StoreConfigurationController@deleteConfiguration');
+    });
+
 });
 
 /*
@@ -132,5 +144,6 @@ Route::group(['middleware' => 'cors', 'prefix' => 'api', 'namespace' => 'Api'], 
      */
     Route::group(['prefix' => 'store', 'namespace' => 'Store'], function () {
         Route::get('/search/{search_string}', 'StoreController@storeSearch');
+        Route::get('/front', 'StoreController@getCurrentStoreFront');
     });
 });

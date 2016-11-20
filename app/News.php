@@ -12,4 +12,8 @@ class News extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function store_config(){
+        $this->belongsToMany('App\Store_Configuration');
+    }
 }

@@ -29,4 +29,8 @@ class Album extends Model
     {
         return $this->belongsToMany('App\Song');
     }
+
+    public function store_config(){
+        $this->belongsToMany('App\Store_Configuration');
+    }
 }

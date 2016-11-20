@@ -17,4 +17,12 @@ class Band extends Model
     {
         return $this->hasOne('App\Band_Additional');
     }
+
+    public function store_config(){
+        $this->belongsToMany('App\Store_Configuration');
+    }
+
+    public function songs(){
+        $this->belongsToMany('App\Song', 'band_id', 'id');
+    }
 }

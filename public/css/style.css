@@ -539,5 +539,48 @@
     color:#69D651;
 }
 
+.other-config{
+    padding:20px;
+    background:#f5f5f5;
+    border:1px solid #ddd;
+}
+
+.other-config h4{
+    margin:0px;
+}
+
+.other-config h4 button{
+    vertical-align: top;
+    display:inline-block;
+    margin-left:15px;
+    margin-top:-7px;
+}
+
+.other-config p{
+    margin:0px;
+}
+
+.other-config > div{
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px solid #ddd;
+}
+
+.other-config > div .config-avatar{
+    display:inline-block;
+    vertical-align: top;
+    width:32px;
+    height:32px;
+    margin-right:10px;
+}
+
+.other-config > div p:last-child{
+    line-height: 30px;
+}
+
+.other-config.active{
+    border:1px solid #69D651;
+}
+
 
 
