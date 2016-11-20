@@ -110,7 +110,7 @@
                     </div>
                     <div class="col-xs-12 col-md-6 col-lg-4">
                         <h4>Create a new configuration</h4>
-                        <form method="POST" action="/api/store/config/create" id="#newStoreConfiguration">
+                        <form method="POST" action="/store/config/create" id="#newStoreConfiguration">
                             <div class="form-group">
                                 <label>Configuration Name:</label>
                                 <input type="text" name="config-name" class="form-control">
