@@ -22,7 +22,7 @@ class StoreController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     public function storeSearch($search_string) {
@@ -38,7 +38,7 @@ class StoreController extends Controller
                 $list_item = [
                     'name' => $artist->name,
                     'url_safe_name' => $artist->url_safe_name,
-                    'band_avatar_url' => $artist->band_additional->band_avatar_url
+                    'band_avatar_url' => ($artist->band_additional !== null ? $artist->band_additional->band_avatar_url : false)
                 ];
                 $artists_list[] = $list_item;
             }
@@ -52,7 +52,9 @@ class StoreController extends Controller
             foreach($albums as $album){
                 $list_item = [
                     'name' => $album->album_name,
-                    'album_image_url' => $album->album_image_url
+                    'artist' => $album->band->name,
+                    'album_image_url' => $album->album_image_url,
+                    'url_safe_name' => $album->url_safe_name
                 ];
                 $albums_list[] = $list_item;
             }
@@ -65,7 +67,9 @@ class StoreController extends Controller
             $songs_list = [];
             foreach($songs as $song){
                 $list_item = [
-                    'name' => $song->song_name
+                    'name' => $song->song_name,
+                    'artist' => $song->band->name,
+                    'url_safe_name' => $song->url_safe_name
                 ];
                 $songs_list[] = $list_item;
             }
