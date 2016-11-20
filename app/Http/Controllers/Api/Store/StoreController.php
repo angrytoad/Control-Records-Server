@@ -50,12 +50,18 @@ class StoreController extends Controller
             $albums = Album::search($search_string)->where('public',1)->get();
             $albums_list = [];
             foreach($albums as $album){
+                $album_artists = [];
+                foreach($album->songs as $song){
+                    $album_artists[$song->band->name] = $song->band->name;
+                }
+
                 $list_item = [
                     'name' => $album->album_name,
-                    'artist' => $album->band->name,
+                    'artists' => $album_artists,
                     'album_image_url' => $album->album_image_url,
                     'url_safe_name' => $album->url_safe_name
                 ];
+
                 $albums_list[] = $list_item;
             }
             $response['albums'] = $albums_list;
