@@ -184,4 +184,20 @@ class AlbumManagerController extends Controller
         File::cleanDirectory('tmp/images/uploads');
         return redirect('/music/albums');
     }
+
+    public static function getAlbumSongArtists(Album $album){
+        $album_artists = [];
+        foreach($album->songs as $song){
+            $album_song = [
+                'song_id' => $song->id,
+                'song_name' => $song->song_name,
+                'song_artist' => $song->band->name,
+                'song_sample_url' => $song->sample_url,
+                'song_url' => $song->url_safe_name
+            ];
+            $album_songs[] = $album_song;
+            $album_artists[$song->band->name] = $song->band->name;
+        }
+        return $album_artists;
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Store;
 use App\Album;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MusicManager\AlbumManagerController;
 use App\Gig;
 use App\News;
 use App\Band;
@@ -12,6 +13,10 @@ use App\Song;
 use App\Venue;
 use App\Store_Configuration;
 use Carbon\Carbon;
+
+use App\Order;
+use App\Line_Item;
+use App\Item_Type;
 
 
 class StoreController extends Controller
@@ -128,6 +133,45 @@ class StoreController extends Controller
             $album_artist_albums[] = $album_artist_album;
         }
 
+        $recent_songs = Song::where('public',true)->orderBy('created_at','DESC')->limit(4)->get();
+        $recent_song_uploads = [];
+        foreach($recent_songs as $recent_song){
+            $song_upload = [
+                'id' => $recent_song->id,
+                'song_name' => $recent_song->song_name,
+                'sample_url' => $recent_song->sample_url,
+                'artist_name' => $recent_song->band->name,
+                'artist_avatar' => (isset($recent_song->band->band_additional) ? $recent_song->band->band_additional->band_avatar_url : false),
+                'url_safe_name' => $recent_song->url_safe_name,
+            ];
+            $recent_song_uploads[] = $song_upload;
+        }
+
+        $recent_albums = Album::where('public', true)->orderBy('created_at','DESC')->limit(4)->get();
+        $recent_album_uploads = [];
+        foreach($recent_albums as $recent_album){
+            $recent_album_artists = [];
+            foreach($recent_album->songs as $song){
+                $recent_album_artists[$song->band->name] = $song->band->name;
+            }
+
+            $album_upload = [
+                'id' => $recent_album->id,
+                'album_image_url' => $recent_album->album_image_url,
+                'artist_name' => (
+                                    count($recent_album_artists) > 1
+                                        ?
+                                        $recent_album->songs[0]->band->name.' and '.(count($recent_album_artists)-1).' other(s)'
+                                        :
+                                        $recent_album->songs[0]->band->name
+                                ),
+                'url_safe_name' => $recent_album->url_safe_name
+            ];
+            $recent_album_uploads[] = $album_upload;
+        }
+
+        $recently_purchased_items = $this->getRecentlyPurchased(4);
+
         $response = [
             'featured_article' => [
                 'article_banner' => 'https://ctrl-records.com/assets/404banner.jpg',
@@ -145,11 +189,75 @@ class StoreController extends Controller
             'featured_artist' => [
                 'artist_name' => $store_configuration->store_artist->name,
                 'artist_avatar' => (isset($store_configuration->store_artist->band_additional) ? $store_configuration->store_artist->band_additional->band_avatar_url : false),
-                'artist_albums' => $album_artist_albums
-            ]
+                'artist_albums' => $album_artist_albums,
+                'url_safe_name' => $store_configuration->store_artist->url_safe_name
+            ],
+            'recent_song_uploads' => $recent_song_uploads,
+            'recent_album_uploads' => $recent_album_uploads,
+            'recently_purchased_items' => $recently_purchased_items,
         ];
 
         return response()->json($response);
+    }
+
+    public function getRecentlyPurchased($limit){
+        /**
+         * Get all recently purchased albums: Song, Album or Otherwise.
+         */
+        $recent_purchases = [];
+        if(isset($limit)){
+            /**
+             * Select the last $limit line items that have been purchased, don't do by order else that adds another layer
+             * of confusion to the whole process.
+             */
+            $purchased = Line_Item::orderBy('created_at','DESC')->limit($limit)->get();
+            foreach($purchased as $purchase){
+                /**
+                 * Create an array of the different item types and their purchase->id's
+                 */
+                $recent_purchases[$purchase->item_type->type][] = $purchase->item_type->item_id;
+            }
+
+            /**
+             * Loop over recently purchased line items and search for either the song or the album depending on what the
+             * item type was, Other will cover items that are not normally music, one off items etc.
+             */
+            foreach($recent_purchases as $recent_purchase_key => $recent_purchase){
+              switch($recent_purchase_key){
+                  case 'song':
+                      $songs = Song::whereIn('id', $recent_purchase)->get();
+                      foreach($songs as $song){
+                          $recent_purchase[] = [
+                              'name' => $song->song_name,
+                              'artist' => $song->band->name,
+                              'image_url' => (isset($song->band->band_additional) ? $song->band->band_additional->band_avatar_url : false),
+                              'full_url_path' => '/song/'.$song->url_safe_name,
+                          ];
+                      }
+                      break;
+                  case 'album':
+                      $albums = Album::whereIn('id', $recent_purchase)->get();
+                      foreach($albums as $album){
+                          /**
+                           * If an album has various artists, we want to display various
+                           */
+                          $album_artists = AlbumManagerController::getAlbumSongArtists($album);
+                          $recent_purchase[] = [
+                              'name' => $album->album_name,
+                              'artist' => (count($album_artists) > 1 ? 'Various' : key($album_artists)),
+                              'image_url' => $album->album_image_url,
+                              'full_url_path' => '/album/'.$album->url_safe_name,
+                          ];
+                      }
+                     break;
+                  case 'other':
+                      break;
+                  default:
+                      break;
+              }
+            }
+            return $recent_purchases;
+        }
     }
 
 }
