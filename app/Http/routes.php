@@ -15,6 +15,10 @@
 
 Route::get('/login', 'Auth\AuthController@showLoginForm');
 Route::post('/login', 'Auth\AuthController@login');
+
+// Route::get('/register', 'Auth\AuthController@showRegistrationForm');
+// Route::post('/register', 'Auth\AuthController@register');
+
 Route::get('/logout', 'Auth\AuthController@logout');
 
 Route::get('/password/reset/{token?}', 'Auth\PasswordController@showResetForm');
