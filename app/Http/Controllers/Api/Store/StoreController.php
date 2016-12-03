@@ -105,15 +105,17 @@ class StoreController extends Controller
         $album_artists = [];
 
         foreach($store_configuration->store_album->songs as $song){
-            $album_song = [
-                'song_id' => $song->id,
-                'song_name' => $song->song_name,
-                'song_artist' => $song->band->name,
-                'song_sample_url' => $song->sample_url,
-                'song_url' => $song->url_safe_name
-            ];
-            $album_songs[] = $album_song;
-            $album_artists[$song->band->name] = $song->band->name;
+            if($song->public) {
+                $album_song = [
+                    'song_id' => $song->id,
+                    'song_name' => $song->song_name,
+                    'song_artist' => $song->band->name,
+                    'song_sample_url' => $song->sample_url,
+                    'song_url' => $song->url_safe_name
+                ];
+                $album_songs[] = $album_song;
+                $album_artists[$song->band->name] = $song->band->name;
+            }
         }
 
         $featured_artist_albums = Album::join('album_song', 'albums.id', '=', 'album_song.album_id')
@@ -125,12 +127,14 @@ class StoreController extends Controller
 
         $album_artist_albums = [];
         foreach($featured_artist_albums as $album){
-            $album_artist_album = [
-                'album_id' => $album->id,
-                'album_name' => $album->album_name,
-                'album_image_url' => $album->album_image_url
-            ];
-            $album_artist_albums[] = $album_artist_album;
+            if($album->public) {
+                $album_artist_album = [
+                    'album_id' => $album->id,
+                    'album_name' => $album->album_name,
+                    'album_image_url' => $album->album_image_url
+                ];
+                $album_artist_albums[] = $album_artist_album;
+            }
         }
 
         $recent_songs = Song::where('public',true)->orderBy('created_at','DESC')->limit(4)->get();

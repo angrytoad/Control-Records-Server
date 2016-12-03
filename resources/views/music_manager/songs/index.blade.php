@@ -22,7 +22,12 @@
                                 </tr>
                                 <tr>
                                     <td>Latest Upload:</td>
-                                    <td><a href="/music/song/{{$songLatest->id}}">{{$songLatest->song_name}}</a></td>
+                                    @if(isset($songLatest))
+                                        <td><a href="/music/song/{{$songLatest->id}}">{{$songLatest->song_name}}</a></td>
+                                    @else
+                                        <td><i>N/A</i></td>
+                                    @endif
+
                                 </tr>
                                 <tr>
                                     <td>Added in the last week:</td>

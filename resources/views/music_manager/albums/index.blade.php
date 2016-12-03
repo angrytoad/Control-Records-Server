@@ -19,7 +19,12 @@
                             </tr>
                             <tr>
                                 <td>Latest Album:</td>
-                                <td><a href="/music/album/{{$albums[0]['id']}}">{{$albums[0]['album_name']}}</a></td>
+                                @if(isset($albums[0]))
+                                    <td><a href="/music/album/{{$albums[0]['id']}}">{{$albums[0]['album_name']}}</a></td>
+                                @else
+                                    <td><i>N/A</i></td>
+                                @endif
+
                             </tr>
                             <tr>
                                 <td>Added in the last week:</td>
