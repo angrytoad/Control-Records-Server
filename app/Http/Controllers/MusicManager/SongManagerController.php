@@ -87,9 +87,10 @@ class SongManagerController extends Controller
         $bandSongs = Song::where('band_id', $song->band_id)->get();
 
         $s3 = AWS::createClient('s3');
+        $exploded_path = explode('/',$song->song_url);
         $cmd = $s3->getCommand('GetObject', [
             'Bucket' => env('S3_AUDIO_STORAGE'),
-            'Key'    => 'songs/paid/'.$song->song_id
+            'Key'    => 'songs/paid/'.end($exploded_path)
         ]);
         $request = $s3->createPresignedRequest($cmd, '+20 minutes');
         $paid_link = (string) $request->getUri();
@@ -235,7 +236,7 @@ class SongManagerController extends Controller
                         'ACL' => "public-read",
                         'SourceFile' => 'tmp/audio/uploads/' . $sample_uuid . '.' . $sample_org_extension,
                         'Bucket' => env('S3_AUDIO_STORAGE'), // REQUIRED
-                        'Key' => 'songs/samples/'.$sample_uuid, // REQUIRED
+                        'Key' => 'songs/samples/'.$sample_uuid . '.' . $sample_org_extension, // REQUIRED
                     ]);
 
                     /**
@@ -258,7 +259,7 @@ class SongManagerController extends Controller
                             'ACL' => "private",
                             'SourceFile' => 'tmp/audio/uploads/' . $paid_uuid . '.' . $paid_org_extension,
                             'Bucket' => env('S3_AUDIO_STORAGE'), // REQUIRED
-                            'Key' => 'songs/paid/'.$paid_uuid, // REQUIRED
+                            'Key' => 'songs/paid/'.$paid_uuid . '.' . $paid_org_extension, // REQUIRED
                         ]);
 
                         if($paid_result['@metadata']['statusCode'] == 200){

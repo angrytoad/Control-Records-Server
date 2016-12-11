@@ -18,7 +18,11 @@
                             <table class="stats-table row">
                                 <tr>
                                     <td>Total:</td>
-                                    <td>{{$songCount}}</td>
+                                    @if(isset($songCount))
+                                        <td>{{$songCount}}</td>
+                                    @else
+                                        <td>0</td>
+                                    @endif
                                 </tr>
                                 <tr>
                                     <td>Latest Upload:</td>

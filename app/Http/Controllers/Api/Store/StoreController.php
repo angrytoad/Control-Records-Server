@@ -107,11 +107,12 @@ class StoreController extends Controller
         foreach($store_configuration->store_album->songs as $song){
             if($song->public) {
                 $album_song = [
-                    'song_id' => $song->id,
+                    'id' => $song->id,
                     'song_name' => $song->song_name,
-                    'song_artist' => $song->band->name,
-                    'song_sample_url' => $song->sample_url,
-                    'song_url' => $song->url_safe_name
+                    'sample_url' => $song->sample_url,
+                    'artist_name' => $song->band->name,
+                    'artist_avatar' => (isset($song->band->band_additional) ? $song->band->band_additional->band_avatar_url : false),
+                    'url_safe_name' => $song->url_safe_name,
                 ];
                 $album_songs[] = $album_song;
                 $album_artists[$song->band->name] = $song->band->name;
@@ -155,13 +156,27 @@ class StoreController extends Controller
         $recent_album_uploads = [];
         foreach($recent_albums as $recent_album){
             $recent_album_artists = [];
-            foreach($recent_album->songs as $song){
-                $recent_album_artists[$song->band->name] = $song->band->name;
-            }
+            $recent_album_songs = [];
 
+            foreach($recent_album->songs as $song){
+                if($song->public) {
+                    $album_song = [
+                        'id' => $song->id,
+                        'song_name' => $song->song_name,
+                        'sample_url' => $song->sample_url,
+                        'artist_name' => $song->band->name,
+                        'artist_avatar' => (isset($song->band->band_additional) ? $song->band->band_additional->band_avatar_url : false),
+                        'url_safe_name' => $song->url_safe_name,
+                        'song_album' => $recent_album->album_name,
+                    ];
+                    $recent_album_songs[] = $album_song;
+                    $recent_album_artists[$song->band->name] = $song->band->name;
+                }
+            }
             $album_upload = [
                 'id' => $recent_album->id,
                 'album_image_url' => $recent_album->album_image_url,
+                'album_songs' => $recent_album_songs,
                 'artist_name' => (
                                     count($recent_album_artists) > 1
                                         ?
